@@ -1,28 +1,31 @@
 package com.company;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class SimpleStack {
-    public static String work(int word[]){
+    public static String Stack(int word[]){
         String res = "";
-        ArrayDeque<Integer> wordArray = new ArrayDeque<Integer>();
-        for(int i = 0; i<word.length;i++){
-            if(word[i]>0){
-                wordArray.add(word[i]);
-                res+=",0";
+        Deque<Integer> wordArray = new ArrayDeque<>();
+        for(int i : word){
+            if(i>0){
+                wordArray.add(i);
+                res = res.concat(",0");
             }
-            else if(word[i] == 0){
+            else if(i == 0){
                 if(wordArray.isEmpty()){
-                    res+= ",-1";
+                    res = res.concat("-1");
                 }
                 else{
-                    res+="," + (int) wordArray.pop();
+                    res = res.concat(",").concat(wordArray.pop().toString());
                 }
             }
         }
         return res;
     }
     public static void main(String[] args) {
-        int word[] =new int[]{0,1,8,4,0,3,0,8,8,3,7} ;
-        System.out.println(work(word));
+
+        int word[] =new int[]{0,1,2,3,0,4,0,5,6,9,7,0,8,0,0,0,0,0};
+        System.out.println(Stack(word));
     }
 }
