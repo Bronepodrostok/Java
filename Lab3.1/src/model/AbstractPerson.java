@@ -1,6 +1,6 @@
 package model;
 
-public abstract class AbstractPerson {
+public abstract class AbstractPerson implements HumanInterface{
     private final String name;
 
     AbstractPerson(String name) {
