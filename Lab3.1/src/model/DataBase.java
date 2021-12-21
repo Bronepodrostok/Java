@@ -51,6 +51,24 @@ public class DataBase {
         sqlStmt.close();
     }
 
+    public  void getFromDataBase() {
+        employees.clear();
+        String sql = "Select * from employee";
+
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet set = stmt.executeQuery();
+            while (set.next()) {
+                Employee temp = new Employee(set.getString("name"), set.getString("department"), set.getInt("age"), set.getString("phone"), set.getString("position"), set.getString("gender"));
+                addEmployee(temp);
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
     public void addEmployeeDataBase(Employee employee) {
         String name = employee.getName();
         int age = employee.getAge();
@@ -71,21 +89,3 @@ public class DataBase {
         }
         getFromDataBase();
     }
-
-    public  void getFromDataBase() {
-        employees.clear();
-        String sql = "Select * from employee";
-
-        try {
-            PreparedStatement stmt = con.prepareStatement(sql);
-            ResultSet set = stmt.executeQuery();
-            while (set.next()) {
-                Employee temp = new Employee(set.getString("name"), set.getString("department"), set.getInt("age"), set.getString("phone"), set.getString("position"), set.getString("gender"));
-                addEmployee(temp);
-            }
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-}
